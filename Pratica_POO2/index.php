@@ -19,7 +19,7 @@
     $p2->setNumConta(2222);
     
     $p1->depositar(300);
-    $p2->depositar(500);
+    $p2->depositar(400);
     
     $p1->sacar(338);
     $p2->sacar(630);
@@ -34,6 +34,6 @@
     print_r($p2);
     
     ?>
-    </pre>
+    </pre> 
 </body>
 </html>
