@@ -1,7 +1,7 @@
 <?php
 require_once 'Controlador.php';
 
-class ControleRemoto
+class ControleRemoto implements Controlador
 {
     //atributos
     private $volume;
@@ -27,7 +27,7 @@ class ControleRemoto
     {
         return $this->tocando;
     }
-    
+
     function setVolume($v)
     {
         $this->volume = $v;
@@ -45,7 +45,7 @@ class ControleRemoto
     {
         $this->setLigado(true);
     }
-    public function deligar()
+    public function desligar()
     {
         $this->setLigado(false);
     }
@@ -53,43 +53,50 @@ class ControleRemoto
     {
         echo "<br> Está ligado?: " . ($this->getLigado() ? "SIM" : "NÃO");
         echo "<br> Está tocando?: " . ($this->getTocando() ? "SIM" : "NÃO");
-        echo "<br>Volume: " . $this->getVolume();
-        for ($i = 0; $i < $this->getVolume(); $i ++) {
+        echo "<br> Volume: " . $this->getVolume();
+        for ($i = 0; $i < $this->getVolume(); $i++) {
             echo "|";
         }
         echo "<br>";
     }
-    public function fecharMenu() {
-    echo "<br> Fechando menu ";
+    public function fecharMenu()
+    {
+        echo "<br> Fechando menu ";
     }
-    public function maisVolume() {
-    if ($this->getLigado()){
-        $this->setVolume($this->getVolume() + 5);
+    public function maisVolume()
+    {
+        if ($this->getLigado()) {
+            $this->setVolume($this->getVolume() + 5);
+        }
     }
+    public function menosVolume()
+    {
+        if ($this->getLigado()) {
+            $this->setVolume($this->getVolume() - 5);
+        }
     }
-    public function menosVolume() {
-    if($this->getLigado()){
-    $this->setVolume($this->getVolume() - 5);
+    public function ligarMudo()
+    {
+        if ($this->getLigado() && $this->getVolume() > 0) {
+            $this->setVolume(0);
+        }
     }
+    public function desligarMudo()
+    {
+        if ($this->getLigado() && $this->getVolume() == 0) {
+            $this->setVolume(50);
+        }
     }
-    public function ligarMudo() {
-    if($this->getLigado() && $this->getVolume() > 0){
-        $this->setVolume(0);
+    public function play()
+    {
+        if ($this->getLigado() && !($this->getTocando())) {
+            $this->setTocando(true);
+        }
     }
-    }
-    public function desligarMudo() {
-    if ($this->getLigado() && $this->getVolume() == 0){
-        $this->setVolume(50);
-    }
-    }
-    public function play() {
-    if($this->getLigado() && !($this->getTocando())){
-        $this->setTocando(true);
-    }
-    }
-    public function pause() {
-    if($this->getLigado() && $this->getTocando()){
-        $this->setTocando(false);
-    }
+    public function pause()
+    {
+        if ($this->getLigado() && $this->getTocando()) {
+            $this->setTocando(false);
+        }
     }
 }

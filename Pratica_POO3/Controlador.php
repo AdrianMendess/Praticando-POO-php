@@ -1,7 +1,7 @@
 <?php 
 interface Controlador { 
     public function ligar(); // metodos dentro de uma interface ja sao abstratas
-    public function deligar();
+    public function desligar();
     public function abrirMenu();
     public function fecharMenu ();
     public function maisVolume ();
